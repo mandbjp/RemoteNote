@@ -100,7 +100,9 @@ $(function(){
     var websocket_function = function(){
         var host = location.host;
         if (host == "") host = "localhost:8888";
-        this.ws = new WebSocket("ws:" + host + "/websocket");
+        var path = location.pathname || "/";
+        if (!path.endsWith("/")) { path += "/" }
+        this.ws = new WebSocket("ws:" + host + path + "websocket");
         var wsAlive = 0;
 
         var pingInterval = 30*1000;
